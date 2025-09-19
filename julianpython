@@ -1,0 +1,135 @@
+def mostrar_menu():
+    print("\n MENÚ PRINCIPAL")
+    print("1. Añadir usuario")
+    print("2. Añadir varios usuarios")
+    print("3. Insertar usuario en una posición")
+    print("4. Borrar usuario por índice")
+    print("5. Borrar usuario por nombre")
+    print("6. Ver índice de un usuario")
+    print("7. Contar apariciones de un usuario")
+    print("8. Ordenar lista de A a Z")
+    print("9. Invertir lista")
+    print("10. Mostrar lista")
+    print("11. Vaciar lista")
+    print("12. Salir")
+    return input("Opción: ").strip()
+
+
+def añadir_usuario(lista):
+    nombre = input("Nombre: ").strip()
+    if nombre:
+        lista.append(nombre)
+        print(f"{nombre} agregado.")
+
+
+def añadir_varios(lista):
+    texto = input("Ingrese nombres separados por coma: ").strip()
+    if texto:
+        nuevos = [n.strip() for n in texto.split(",") if n.strip()]
+        lista.extend(nuevos)
+        print("Agregados:", nuevos)
+
+
+def insertar(lista):
+    pos = input(f"Posición (0 a {len(lista)}): ").strip()
+    if pos.isdigit():
+        pos = int(pos)
+        if 0 <= pos <= len(lista):
+            nombre = input("Nombre: ").strip()
+            if nombre:
+                lista.insert(pos, nombre)
+                print(f"{nombre} insertado en posición {pos}.")
+
+
+def borrar_por_indice(lista):
+    if lista:
+        pos = input(f"Índice a borrar (0 a {len(lista)-1}): ").strip()
+        if pos.isdigit():
+            pos = int(pos)
+            if 0 <= pos < len(lista):
+                eliminado = lista.pop(pos)
+                print(f"Se eliminó {eliminado}.")
+
+
+def borrar_por_nombre(lista):
+    nombre = input("Nombre a borrar: ").strip()
+    if nombre in lista:
+        lista.remove(nombre)
+        print(f"{nombre} eliminado.")
+
+
+def ver_indice(lista):
+    nombre = input("Nombre a buscar: ").strip()
+    if nombre in lista:
+        print(f"{nombre} está en la posición {lista.index(nombre)}.")
+
+
+def contar(lista):
+    nombre = input("Nombre a contar: ").strip()
+    print(f"{nombre} aparece {lista.count(nombre)} veces.")
+
+
+def ordenar(lista):
+    lista.sort()
+    print("Lista ordenada.")
+
+
+def invertir(lista):
+    lista.reverse()
+    print("Lista invertida.")
+
+
+def mostrar(lista):
+    if lista:
+        print("\nLista actual:")
+        for i, n in enumerate(lista):
+            print(f"{i}: {n}")
+    else:
+        print("La lista está vacía.")
+
+
+def vaciar(lista):
+    confirmar = input("¿Seguro que quiere vaciar la lista? (s/n): ").strip().lower()
+    if confirmar in ("s", "si"):
+        lista.clear()
+        print("Lista vaciada.")
+
+
+def main():
+    usuarios = [] 
+
+    while True:
+        opcion = mostrar_menu()
+
+        if opcion == "1":
+            añadir_usuario(usuarios)
+        elif opcion == "2":
+            añadir_varios(usuarios)
+        elif opcion == "3":
+            insertar(usuarios)
+        elif opcion == "4":
+            borrar_por_indice(usuarios)
+        elif opcion == "5":
+            borrar_por_nombre(usuarios)
+        elif opcion == "6":
+            ver_indice(usuarios)
+        elif opcion == "7":
+            contar(usuarios)
+        elif opcion == "8":
+            ordenar(usuarios)
+        elif opcion == "9":
+            invertir(usuarios)
+        elif opcion == "10":
+            mostrar(usuarios)
+        elif opcion == "11":
+            vaciar(usuarios)
+        elif opcion == "12":
+            print("Saliendo... Lista final:")
+            mostrar(usuarios)
+            break
+        else:
+            print("Opción inválida.")
+
+
+if __name__ == "__main__":
+    main()
